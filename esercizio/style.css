@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+#scelta, button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+/* Stile per la griglia del gioco (tabella) */
+#tabella {
+    margin-top: 20px;
+    display: grid;
+}
+
+/* Stile per i bottoni (le carte) */
+.card {
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+    border: 3px solid #333;
+    border-radius: 8px;
+    background-color: black; /* Colore iniziale (coperto) */
+}
+
+/* Stili per i colori che le carte possono assumere */
+.color-0 { background-color: #f60000; } /* Rosso */
+.color-1 { background-color: #00ff2f; } /* Verde */
+.color-2 { background-color: #002fff; } /* Blu */
+.color-3 { background-color: #920092; } /* Viola */
+.color-4 { background-color: #FFFF33; } /* Giallo */
+.color-5 { background-color: #5b991d; } /* Verde chiaro */
+.color-6 { background-color: #017d93; } /* Azzurro */
+.color-7 { background-color: #5b3c21; } /* Marrone */
+.color-8 { background-color: #ff0080; } /*Rosa*/
