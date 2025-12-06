@@ -1,3 +1,4 @@
+// tutto funziona
 // Array di classi CSS che rappresentano i colori disponibili
 const COLOR_CLASSES = [
     'color-0', 'color-1', 'color-2', 'color-3', 'color-4', 
