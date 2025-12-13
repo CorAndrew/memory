@@ -1,13 +1,12 @@
-// tutto funziona
-// Array di classi CSS che rappresentano i colori disponibili
-const COLOR_CLASSES = [
-    'color-0', 'color-1', 'color-2', 'color-3', 'color-4', 
-    'color-5', 'color-6', 'color-7', 'color-8'
+// Array di classi CSS che rappresentano le immagini disponibili
+const immagini = [
+    "immagine0", "immagine1", "immagine2", "immagine3", "immagine4", 
+    "immagine5", "immagine6", "immagine7", "immagine8", "immagine9"
 ];
 
 let dimension;              // Numero totale di bottoni
 let num;                    // Numero di coppie (dimension / 2)
-let coloriAssegnati = [];   // Array che conterrà l'assegnazione finale dei colori
+let coloriAssegnati = [];   // Array che conterrà l'assegnazione finale dei colori (ID Immagine)
 let carteGirate = [];       // Array temporaneo per tenere traccia delle carte girate (massimo 2)
 let coppieTrovate = 0;      // Contatore delle coppie trovate
 let bloccoClick = false;    // Flag per bloccare i click durante il timeout di controllo
@@ -24,10 +23,10 @@ function genera() {
             dimension = 16;
             break;
         case 'm':
-            dimension = 16;
+            dimension = 36;
             break;
         case 'd':
-            dimension = 36;
+            dimension = 64;
             break;
         default:
             return;
@@ -36,8 +35,8 @@ function genera() {
     num = dimension / 2;
     coppieTrovate = 0;
     
-    // Genera e mischia i colori
-    preparaColori();
+    // Genera e mischia gli ID delle immagini
+    preparaImmagini();
     
     // Crea la griglia (tabella)
     const dimensioneGriglia = Math.sqrt(dimension);
@@ -47,23 +46,30 @@ function genera() {
     for (let i = 0; i < dimension; i++) {
         const button = document.createElement('button');
         button.className = 'card';
-        button.dataset.colore = coloriAssegnati[i]; // Assegna l'ID del colore
+        button.dataset.colore = coloriAssegnati[i]; // Assegna l'ID dell'immagine
         button.addEventListener('click', gestisciClick);
         tabellaDiv.appendChild(button);
     }
     
-    // Pulisce messaggi precedenti
-    document.getElementById('messaggioVittoria').remove();
+    // Pulisce i messaggi precedenti
+    const messaggioVittoria = document.getElementById('messaggioVittoria');
+    if (messaggioVittoria) {
+        messaggioVittoria.remove();
+    }
+    const resetButton = document.querySelector('button[onclick="resetGame()"]');
+    if (resetButton) {
+        resetButton.remove();
+    }
 }
 
-// Prepara l'array con i colori e li mischia
-function preparaColori() {
+// Prepara l'array con gli ID delle immagini e li mischia
+function preparaImmagini() {
     coloriAssegnati = [];
     
-    // Crea le coppie di colori
+    // Crea le coppie di ID immagine
     for (let i = 0; i < num; i++) {
-        // Usa l'indice dell'array COLOR_CLASSES come ID colore
-        const coloreId = i % COLOR_CLASSES.length; 
+        // Usa l'indice dell'array immagini come ID immagine
+        const coloreId = i % immagini.length; 
         coloriAssegnati.push(coloreId, coloreId);
     }
     
@@ -80,9 +86,9 @@ function gestisciClick() {
         return; // Ignora se bloccato, già accoppiato, o se è la stessa carta cliccata due volte
     }
 
-    // Mostra il colore
+    // Mostra l'immagine
     const coloreId = this.dataset.colore;
-    this.classList.add(COLOR_CLASSES[coloreId]);
+    this.classList.add(immagini[coloreId]);
     
     // Aggiungi la carta all'array delle carte girate
     carteGirate.push(this);
@@ -120,9 +126,9 @@ function gestisciClick() {
             
             // Dopo 1 secondo, nasconde le carte
             setTimeout(() => {
-                // Rimuove la classe colore (tornano nere)
-                carta1.classList.remove(COLOR_CLASSES[carta1.dataset.colore]);
-                carta2.classList.remove(COLOR_CLASSES[carta2.dataset.colore]);
+                // Rimuove la classe immagine (torna al background:black)
+                carta1.classList.remove(immagini[carta1.dataset.colore]);
+                carta2.classList.remove(immagini[carta2.dataset.colore]);
                 
                 // Pulisce lo stato per il prossimo turno
                 carteGirate = [];
@@ -134,7 +140,7 @@ function gestisciClick() {
 
 // Funzione che gestisce la schermata di vittoria
 function vittoria() {
-    const body = document.body;
+    const mainContainer = document.querySelector('body'); // Usa body o un contenitore più specifico
     
     // Messaggio di vittoria
     const messaggio = document.createElement('p');
@@ -146,14 +152,15 @@ function vittoria() {
     resetButton.textContent = "Nuova Partita";
     resetButton.onclick = resetGame;
     
-    body.appendChild(messaggio);
-    body.appendChild(resetButton);
+    mainContainer.appendChild(messaggio);
+    mainContainer.appendChild(resetButton);
 }
 
 // Funzione che resetta il gioco
 function resetGame() {
     // Pulisce l'area di gioco e il messaggio di vittoria
     document.getElementById('tabella').innerHTML = '';
+    
     const vittoriaElement = document.getElementById('messaggioVittoria');
     if (vittoriaElement) vittoriaElement.remove();
     
@@ -164,8 +171,4 @@ function resetGame() {
     carteGirate = [];
     coppieTrovate = 0;
     bloccoClick = false;
-    
-    // Riabilita la selezione difficoltà e il bottone 'Genera'
-    document.getElementById('scelta').disabled = false;
-    document.querySelector('button[onclick="genera()"]').disabled = false;
 }

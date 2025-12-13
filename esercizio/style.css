@@ -28,18 +28,22 @@ h1 {
     width: 80px;
     height: 80px;
     margin: 5px;
-    border: 3px solid #333;
     border-radius: 8px;
     background-color: black; /* Colore iniziale (coperto) */
+    background-size: cover;      /* Assicura che l'immagine copra il bottone */
+    background-position: center;
 }
 
 /* Stili per i colori che le carte possono assumere */
-.color-0 { background-color: #f60000; } /* Rosso */
-.color-1 { background-color: #00ff2f; } /* Verde */
-.color-2 { background-color: #002fff; } /* Blu */
-.color-3 { background-color: #920092; } /* Viola */
-.color-4 { background-color: #FFFF33; } /* Giallo */
-.color-5 { background-color: #5b991d; } /* Verde chiaro */
-.color-6 { background-color: #017d93; } /* Azzurro */
-.color-7 { background-color: #5b3c21; } /* Marrone */
-.color-8 { background-color: #ff0080; } /*Rosa*/
+.immagine0 {
+     background-image: url("../immagini/alce.webp"); /* Alce*/
+    } 
+.immagine1 { background-image: url("../immagini/asino.webp") } /* Asino */
+.immagine2 { background-image: url("../immagini/cane.webp"); } /* Cane */
+.immagine3 { background-image: url("../immagini/cavallo.webp"); } /* Cavallo */
+.immagine4 { background-image: url("../immagini/foca.webp");} /* Foca */
+.immagine5 { background-image: url("../immagini/gatto.webp"); } /* Gatto */
+.immagine6 { background-image: url("../immagini/mucca.webp"); } /* Mucca */
+.immagine7 { background-image: url("../immagini/orso.webp"); } /* Orso polare */
+.immagine8 { background-image: url("../immagini/pesce.webp"); } /*Pesce rosso*/
+.immagine9 { background-image: url("../immagini/volpe.webp"); } /*Volpe artica*/
